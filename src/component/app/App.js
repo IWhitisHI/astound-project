@@ -3,7 +3,7 @@ import AppAddProducts from '../app-add-products/app-add-products';
 import AppMain from '../app-main/app-main';
 
 
-import './App.css';
+import './App.scss';
 
 function App() {
   return (

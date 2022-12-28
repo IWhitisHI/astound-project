@@ -3,11 +3,11 @@ import mainImg from '../../img/lightbringer-trans_copy_4.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-import './app-main.css';
+import './app-main.scss';
 
 function AppMain() {
 
-    let changeChoosed = true
+    let changeChoosed = true;
     
     const changeChoosedFunc = () => {
 		changeChoosed = !changeChoosed
@@ -16,7 +16,7 @@ function AppMain() {
         } else {
             return 'choosed'
         }
-    }
+    };
  
     return (
         <main>
