@@ -1,4 +1,4 @@
-import React from 'react'; 
+import { React, useState } from 'react'; 
 import mainImg from '../../img/lightbringer-trans_copy_4.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -6,18 +6,27 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import './app-main.scss';
 
 function AppMain() {
+	const availableColours = [
+		{numberKey: 1, wcolor :"bc-77d8e7"},
+		{numberKey: 2, wcolor :"bc-96c795"},
+		{numberKey: 3, wcolor :"bc-ce92a1"},
+		{numberKey: 4, wcolor :"bc-aa93cf"}
+	]
+	const availableSizes = [
+		{numberKey: 1, wsize :"XS"},
+		{numberKey: 2, wsize :"S"},
+		{numberKey: 3, wsize :"M"}
+	]
+	const [color, setColor] = useState(1);
+	const [size, setSize] = useState(3);
+	
+	const changeColor = (colorKey) => {
+		setColor(color => color = colorKey);
+	}
+	const changeSize = (sizeKey) => {
+		setSize(size => size = sizeKey);
+	}
 
-    let changeChoosed = true;
-    
-    const changeChoosedFunc = () => {
-		changeChoosed = !changeChoosed
-        if (!changeChoosed) {
-            return ''
-        } else {
-            return 'choosed'
-        }
-    };
- 
     return (
         <main>
     		<article className="grid">
@@ -57,18 +66,23 @@ function AppMain() {
     				<div className="available-sizes">
     					<div className="header-size"><span className="tablet-header">SIzE:</span></div>
     					<div className="sizes">
-    						<div className="size">XS</div>
-    						<div className="size">S</div>
-    						<div className="size choosed">M</div>
+							{availableSizes.map(({numberKey, wsize}, item) => {
+								const active = numberKey === size;
+								const clazz = active ? 'choosed' : '';
+								return(
+								<div className={`size ${clazz}`} key={item} onClick={() => changeSize(numberKey)}>{wsize}</div>
+							)})}
     					</div>
     				</div>
     				<div className="available-colours">
     					<div className="header-size"><span className="tablet-header">color:</span></div>
     					<div className="colours">
-    						<div className={`bc-77d8e7 colour ${changeChoosedFunc()}`} onClick={() => (changeChoosedFunc())}></div>
-    						<div className={`bc-96c795 colour ${changeChoosedFunc()}`} onClick={() => (changeChoosedFunc())}></div>
-    						<div className={`bc-ce92a1 colour ${changeChoosedFunc()}`} onClick={() => (changeChoosedFunc())}></div>
-    						<div className={`bc-aa93cf colour ${changeChoosedFunc()}`} onClick={() => (changeChoosedFunc())}></div>
+							{availableColours.map(({numberKey, wcolor}, item) => {
+								const active = numberKey === color;
+								const clazz = active ? 'choosed' : '';
+								return(
+								<div className={`${wcolor} colour ${clazz}`} key={item} onClick={() => changeColor(numberKey)}></div>
+							)})}
     					</div>
     				</div>
     				<button className="add-to-cart" type="button">add to cart</button>
